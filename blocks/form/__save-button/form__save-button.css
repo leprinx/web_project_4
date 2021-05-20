@@ -1,0 +1,14 @@
+.form__save-button {
+    background-color: rgba(0, 0, 0);
+    color: white;
+    height: 50px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.21;
+    border: none;
+}
+
+.form__save-button:hover {
+    cursor: pointer;
+    background-color: grey;
+}

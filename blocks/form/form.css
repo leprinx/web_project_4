@@ -1,0 +1,9 @@
+@import url("__title/form__title.css");
+@import url("__save-button/form__save-button.css");
+@import url("__save-button/form__save-button.css");
+@import url("__edit-form-description/form__edit-form-description.css");
+@import url("__edit-form-name/form__edit-form-name.css");
+.form {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,9 @@
+.places__element-like {
+    font-size: 21px;
+    padding: 0;
+    margin: 0;
+}
+
+.places__element-like:hover {
+    opacity: 0.5;
+}

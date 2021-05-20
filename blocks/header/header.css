@@ -1,0 +1,15 @@
+@import url("__title/header__title.css");
+@import url("__subtitle/header__subtitle.css");
+.header {
+    border-bottom: 1px solid #545454;
+    padding-top: 45px;
+    display: flex;
+}
+
+@media screen and (max-width: 450px) {
+    .container.header {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+}

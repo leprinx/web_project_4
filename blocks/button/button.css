@@ -1,0 +1,22 @@
+.button {
+    margin-top: 159px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    transform: rotate(-45deg);
+    width: 40px;
+    height: 40px;
+    font-size: 80px;
+    line-height: 0.3;
+}
+
+.button:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+@media screen and (max-width:550px) {
+    .button {
+        margin: 0 calc((100% - 282px) / 2);
+        order: 1;
+    }
+}

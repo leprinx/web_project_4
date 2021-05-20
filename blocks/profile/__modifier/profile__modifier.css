@@ -1,0 +1,21 @@
+.profile__modifier {
+    width: 10px;
+    height: 10px;
+    padding: 7px;
+    margin-left: 18px;
+    border: 1px solid #FFFFFF;
+    cursor: pointer;
+}
+
+.profile__modifier:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 450px) {
+    .profile__modifier {
+        width: 7.5px;
+        height: 7.5px;
+        padding: 4px;
+        margin-left: 10px;
+    }
+}

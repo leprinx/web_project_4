@@ -1,0 +1,19 @@
+.places__element {
+    border-radius: 10px 10px 0 0;
+    background-color: #FFF;
+    color: BLACK;
+    min-width: calc((100% - 34px) / 3);
+}
+
+@media screen and (max-width: 900px) {
+    .places__element {
+        min-width: calc((100% - 17px) / 2);
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .places__element {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
