@@ -4,6 +4,7 @@
 @import url("__element-description/places__element-description.css");
 @import url("__title/places__title.css");
 @import url("__element-like/places__element-like.css");
+@import url("__element-like/_active/places__element-like_active.css");
 .places {
     padding-top: 45px;
 }
