@@ -1,14 +1,13 @@
-const coverEl = document.querySelector(".cover");
-const coverOpener = document.querySelector(".profile__modifier");
-const coverCloser = document.querySelector(".button");
-const formSaved = document.querySelector(".form__save-button");
+let coverEl = document.querySelector(".cover");
+let coverOpener = document.querySelector(".profile__modifier");
+let coverCloser = document.querySelector(".button");
+let formSaved = document.querySelector(".form__save-button");
 
-const formName = document.querySelector(".form__edit-form-name");
-const formDescription = document.querySelector(".form__edit-form-description");
-const displayedName = document.querySelector(".profile__author");
-const displayedInfo = document.querySelector(".profile__subtitle");
+let formName = document.querySelector(".form__edit-form-name");
+let formDescription = document.querySelector(".form__edit-form-description");
+let displayedName = document.querySelector(".profile__author");
+let displayedInfo = document.querySelector(".profile__subtitle");
 
-const likeElem = document.querySelectorAll(".places__element-like");
 
 // function that opens our cover by adding class
 
@@ -43,22 +42,15 @@ formSaved.addEventListener("click", function(event) {
 });
 
 //function that likes or unlikes places element
-
+let likeElem = document.querySelectorAll(".places__element-like");
 
 for (let i = 0; likeElem.length; i++) {
     likeElem[i].addEventListener("click", function() {
-        likeElem[i].classList.add("places__element-like_active");
-        const likedElem = document.querySelectorAll(".places__element-like_active");
-        for (let j = 0; likedElem.length; j++) {
-            likedElem[j].textContent = "♥";
-            likedElem[j].addEventListener("click", function() {
-                likedElem[j].classList.remove("places__element-like_active");
-                likedElem[j].classList.add("places__element-like_disabled");
-                let disabledLike = document.querySelectorAll("places__element-like_disabled");
-                for (let m = 0; disabledLike.length; m++) {
-                    disabledLike[m].textContent = "test";
-                }
-            })
+        likeElem[i].classList.toggle("places__element-like_active");
+        if (likeElem[i].classList.contains("places__element-like_active") == true) {
+            likeElem[i].textContent = "♥";
+        } else {
+            likeElem[i].textContent = "♡";
         }
     });
 };
