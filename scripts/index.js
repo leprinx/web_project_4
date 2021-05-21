@@ -44,7 +44,7 @@ formSaved.addEventListener("click", function(event) {
 //function that likes or unlikes places element
 let likeElem = document.querySelectorAll(".places__element-like");
 
-for (let i = 0; likeElem.length; i++) {
+for (let i = 0; i < likeElem.length; i++) {
     likeElem[i].addEventListener("click", function() {
         likeElem[i].classList.toggle("places__element-like_active");
         if (likeElem[i].classList.contains("places__element-like_active") == true) {
