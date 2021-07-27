@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 8</title>
+</head>
+
+<body class="page">
+    <header class="header container">
+        <img src="images/header/Vector.svg" alt="Around the US" class="header__logo">
+    </header>
+    <main class="content container">
+        <section class="profile-form">
+            <div class="cover cover_type_edit">
+                <div class="cover__box">
+                    <h2 class="profile-form__title">Edit profile</h2>
+                    <form class="form form_type_profile" name="change-profile" novalidate>
+                        <input id="name-input" type="text" class="form__edit-form form__edit-form_type_name" name="name" placeholder="text" required minlength="2" maxlength="40">
+                        <span class="form__input-error" id="name-input-error"></span>
+                        <input id="description-input" type="text" class="form__edit-form form__edit-form_type_description" name="job" required placeholder="text" minlength="2" maxlength="200">
+                        <span class="form__input-error" id="description-input-error"></span>
+                        <button class="reset-button form__save-button form__save-button_disabled" type="submit" disabled>Save</button>
+                    </form>
+                    <button class="reset-button" type="reset">
+                        <img src="images/button/Close-Icon.svg" alt="close icon" class="button button_type_profile">
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="add-places-form">
+            <div class="cover cover_type_add">
+                <div class="cover__box">
+                    <h2 class="add-places-form__title">New place</h2>
+                    <form class="form form_type_places" name="add-places" novalidate>
+                        <input id="new-place-input" type="text" class="form__edit-form form__edit-form_type_new-place" name="name" placeholder="text" required minlength="1" maxlength="40">
+                        <span class="form__input-error" id="new-place-input-error"></span>
+                        <input id="new-place-link" type="url" class="form__edit-form form__edit-form_type_place-picture" name="link" placeholder="link" required>
+                        <span class="form__input-error" id="new-place-link-error"></span>
+                        <button class="reset-button form__save-button form__save-button_disabled" type="submit" disabled>Save</button>
+                    </form>
+                    <button class="reset-button" type="reset">
+                        <img src="images/button/Close-Icon.svg" alt="close icon" class="button button_type_places">
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="show-place">
+            <div class="cover  cover_type_preview">
+                <div class="cover__box cover__box_type_preview">
+                    <button class="reset-button" type="reset">
+                        <img src="images/button/Close-Icon.svg" alt="close icon" class="button button_type_preview">
+                    </button>
+                    <img alt="preview-image" class="cover__preview-image" src="https://code.s3.yandex.net/web-code/yosemite.jpg">
+                    <p class="cover__preview-image-subtitle"></p>
+                </div>
+            </div>
+        </section>
+        <section class="profile">
+            <div class="profile__info">
+                <img src="images/header/cousteau.jpg" alt="Traveler profile picture" class="profile__avatar">
+                <div class="profile__description">
+                    <div class="profile__line">
+                        <h1 class="profile__author">Jacques Cousteau</h1>
+                        <button class="reset-button" type="button"> 
+                           <img src="images/profile/modifier.png" alt="pen" class="profile__modifier">
+                        </button>
+                    </div>
+                    <p class="profile__subtitle">Explorer</p>
+                </div>
+            </div>
+            <button class="reset-button add-element" type="button">
+                <img src="images/add-element/add-element.svg" alt="plus symbol" class="add-element__symbol">
+            </button>
+        </section>
+        <section class="places">
+            <ul class="places__elements">
+            </ul>
+        </section>
+    </main>
+    <footer class="footer container">
+        <p class="footer__information">
+            &copy; 2021 Around the US
+        </p>
+    </footer>
+    <template id="places-template">
+        <li class="places__element">
+            <img class="places__picture">
+            <div class="places__element-description">
+                <h2 class="places__title"></h2>
+                <button class="reset-button places__element-like" type="button">
+                </button>
+            </div>
+            <img src="images/places/delete-button.svg" alt="trash can" class="places__element-remove">
+        </li>
+    </template>
+    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/Card.js"></script>
+    <script type="module" src="./scripts/FormValidator.js"></script>
+</body>
+
+</html>
