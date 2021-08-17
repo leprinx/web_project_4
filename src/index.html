@@ -62,7 +62,7 @@
           <div class="cover cover_type_delete">
                 <div class="cover__box">
                     <form id="delete-card" class="form form_type_delete-card">
-                        <h2 class="profile-form__title">Are you sure?</h2>
+                        <h2 class="delete-card__title title">Are you sure?</h2>
                         <button class="reset-button form__save-button" type="submit" >Yes</button>
                         <button class="reset-button" type="reset">
                         <img src="<%=require("./images/button/Close-Icon.svg")%>" alt="close icon" class="button button_type_profile">
@@ -72,9 +72,9 @@
           </div>
         </section>
         <section class="change-profilePic">
-            <div class="cover cover_type_changePic">
+            <div class="cover cover_type_changePic title">
                 <div class="cover__box">
-                    <h2 class="add-places-form__title">Change profile picture</h2>
+                    <h2 class="change-profilePic__title">Change profile picture</h2>
                     <form class="form form_type_picture" name="change-profilePic" novalidate>
                         <input id="new-pic-link" type="url" class="form__edit-form form__edit-form_type_profile-picture" name="pic-link" placeholder="link" required>
                         <span class="form__input-error" id= "new-pic-link-error"></span>
