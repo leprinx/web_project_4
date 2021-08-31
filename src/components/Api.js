@@ -13,29 +13,23 @@ class Api {
         if (res.ok) {
           return res.json();
         } else {
-          return `Error:${res.status}`;
+          return Promise.reject(`Error ${res.status}`);
         }
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }
-  getUserId() {
+  getUserData() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
         authorization: this._authToken,
       },
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return `Error:${res.status}`;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Error ${res.status}`);
+      }
+    });
   }
   updateUserId({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -49,16 +43,13 @@ class Api {
         about: about,
       }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return `Error:${res.status}`;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Error ${res.status}`);
+      }
+    });
   }
   addCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
@@ -72,20 +63,13 @@ class Api {
         link: link,
       }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return `Error:${res.status}`;
-        }
-      })
-      .then((res) => {
-        console.log(res);
-        return res;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Error ${res.status}`);
+      }
+    });
   }
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
@@ -95,16 +79,13 @@ class Api {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return `Error:${res.status}`;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Error ${res.status}`);
+      }
+    });
   }
   removeLike(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
@@ -114,16 +95,13 @@ class Api {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return `Error:${res.status}`;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Error ${res.status}`);
+      }
+    });
   }
   removeCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
@@ -133,17 +111,13 @@ class Api {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => {
-        console.log(id);
-        if (res.ok) {
-          return res.json();
-        } else {
-          return `Error:${res.status}`;
-        }
-      })
-      .catch((err) => {
-        console.log(`Error ${err}`);
-      });
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Error ${res.status}`);
+      }
+    });
   }
   changeProfilePic(newAvatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {

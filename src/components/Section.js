@@ -1,7 +1,7 @@
 class Section {
     constructor({ renderer }, classSelector) {
         this._renderer = renderer;
-        this._classSelector = document.querySelector(classSelector);
+        this._container = document.querySelector(classSelector);
     }
     renderItems(items) {
         items.forEach(item => {
@@ -9,7 +9,7 @@ class Section {
         });
     }
     addItem(element) {
-        this._classSelector.append(element);
+        this._container.append(element);
     }
 }
 
