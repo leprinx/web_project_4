@@ -8,14 +8,12 @@ class UserInfo {
         this._userObject = {
             name: this._name,
             job: this._job,
-            id: this._id
         };
-        console.log(this._userObject);
         return this._userObject;
     }
     setUserInfo(data) {
         this._name.textContent = data.name;
-        this._job.textContent = data.job;
+        this._job.textContent = data.about;
         this._avatar.src = data.avatar;
         this._userId = data._id;
     }

@@ -1,11 +1,11 @@
 import "./index.css"; 
- 
 import Api from "../components/Api.js"; 
 import FormValidator from "../components/FormValidator.js"; 
 import Card from "../components/Card.js"; 
 import Section from "../components/Section.js"; 
 import PopupWithImage from "../components/PopupWithImage.js"; 
-import PopupWithForm from "../components/PopupWithForm.js"; 
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupDeleteCard from "../components/PopupDeleteCard.js";
 import UserInfo from "../components/UserInfo.js"; 
 import { 
   displayedName, 
@@ -34,15 +34,9 @@ const api = new Api({
   authToken: "9610d3b0-6c7e-4344-9c28-b6cc47054a96", 
 }); 
  
+
 const userInfo = api.getUserData();
 const firstCards = api.getCards();
-const newUserInfo = new UserInfo({ 
-  name: displayedName, 
-  job: displayedInfo,
-  avatar: avatar
-}); 
-
-
 Promise.all([userInfo, firstCards])
 .then(([userData, cards]) => {
   newUserInfo.setUserInfo(userData);
@@ -60,39 +54,39 @@ const createCard = (card) => {
       handleCardClick: () => {
         imageModal.open(card);
       },
-      handleCardDelete: (id) => {
-        const deletePopup = new PopupDeleteCard(
-          { 
-            callback: (id) => { 
-              loadingMessage(true, formDelete, "Deleting..."); 
-              api
-                api.removeCard(id)
-                .then(deletePopup.close())
-                .catch((err) => {
-                  console.log(`Error: ${err}`);
-                })
-                .finally(loadingMessage(false, formDelete, "Deleting..."));  
-            }, 
-          }, 
-          ".cover_type_delete" 
-        )
-        deletePopup.setEventListeners();
-        deletePopup.open();
+      handleCardDelete: (evt) => {
+        deletePopup.open(card._id, evt);
       },
-      handleCardLikes: (isLiked, cardId) =>{
-        return isLiked ? api.addLike(cardId) : api.removeLike(cardId)
+      handleCardLikes: (isLiked) =>{
+        return isLiked ? api.removeLike(card._id) : api.addLike(card._id)
       },
-      userData: userInfo
+      userData: newUserInfo.getId()
     },
     "#places-template"
   );
   return newCardAdded;
 };
 
- 
+const renderElementsTemplate = new Section( 
+  { 
+    renderer: (card) => { 
+      const newCard = createCard(card);
+      const generatedCard = newCard.generateCard(); 
+      renderElementsTemplate.addItem(generatedCard); 
+    }, 
+  }, 
+  ".places__elements" 
+); 
+
 const imageModal = new PopupWithImage(".cover_type_preview"); 
 imageModal.setEventListeners(); 
- 
+
+const newUserInfo = new UserInfo({ 
+  name: displayedName, 
+  job: displayedInfo,
+  avatar: avatar
+}); 
+
 const changePicPopup = new PopupWithForm( 
   { 
     callback: (input) => { 
@@ -101,6 +95,7 @@ const changePicPopup = new PopupWithForm(
 
         .changeProfilePic(input["pic-link"])
         .then(avatar.src = input["pic-link"])
+        .then(changePicPopup.close())
         .catch((err) => {
           console.log(`Error: ${err}`);
         })
@@ -114,17 +109,26 @@ avatarButton.addEventListener("click", () => {
   changePicPopup.open(); 
 }); 
 
-
-const renderElementsTemplate = new Section( 
+const deletePopup = new PopupDeleteCard(
   { 
-    renderer: (card) => { 
-      const newCard = createCard(card); 
-      const generatedCard = newCard.generateCard(); 
-      renderElementsTemplate.addItem(generatedCard); 
+    callback: (id, place) => { 
+      loadingMessage(true, formDelete, "Deleting..."); 
+      api
+        api.removeCard(id)
+        .then(()=> {
+          place.remove();
+          deletePopup.close()}
+          )
+        .catch((err) => {
+          console.log(`Error: ${err}`);
+        })
+        .finally(loadingMessage(false, formDelete, "Deleting..."));  
     }, 
   }, 
-  ".places__elements" 
-); 
+  ".cover_type_delete" 
+)
+deletePopup.setEventListeners();
+
   
 
 
@@ -132,12 +136,15 @@ const renderElementsTemplate = new Section(
 const editProfileForm = new PopupWithForm( 
   { 
     callback: (data) => {
-      console.log(data);
+      console.log(data)
       loadingMessage(true, formEditProfile, "Saving..."); 
       api 
-        .updateUserId({ name: data.name, about: data.job }) 
-        .finally(loadingMessage(false, formEditProfile, "Saved")); 
-      newUserInfo.setUserInfo({ data}); 
+        .updateUserId(data)
+        .then(res =>{
+          newUserInfo.setUserInfo(res);
+        })
+        .then(editProfileForm.close()) 
+        .finally(loadingMessage(false, formEditProfile, "Saved"));  
     }, 
   }, 
   ".cover_type_edit" 
@@ -160,9 +167,10 @@ const addCardForm = new PopupWithForm(
         .addCard(card) 
         .then((res) => { 
           const response = res; 
-          const addedPlace = createCard(response); 
+          const addedPlace = createCard(response);
           renderElementsTemplate.addItem(addedPlace.generateCard()); 
-        }) 
+        })
+        .then(addCardForm.close())
         .finally(loadingMessage(false, formAddCard, "Adding...")); 
     }, 
   }, 
@@ -175,10 +183,9 @@ openAddCardBtn.addEventListener("click", () => {
   addCardForm.open(); 
 }); 
  
-const editFormValidator = new FormValidator(settings, popupEditProfile); 
+const editFormValidator = new FormValidator(settings, popupEditProfile);
 editFormValidator.enableValidation(); 
 const addCardFormValidator = new FormValidator(settings, popupAddCard); 
 addCardFormValidator.enableValidation(); 
 const profilePicValidator = new FormValidator(settings, popupChangeProfilePic); 
 profilePicValidator.enableValidation(); 
-

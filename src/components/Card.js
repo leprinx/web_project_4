@@ -20,21 +20,23 @@ class Card {
     return this._cardTemplate;
   }
   _isLiked(){
-    return this._likes.some((el) => el.name === this._userData.name);
-  }
-  _handleRemovePlace() {
-    this._place = this._removePlace.parentElement;
-    this._handleDeleteCard(this._id).then(this._place.remove());
+    return this._likes.some((el) => el._id === this._userData);
   }
   _setEventListeners() {
     this._placeImage.addEventListener("click", () => {
       this._handleCardClick();
     });
-    this._removePlace.addEventListener("click", () => {
-      this._handleRemovePlace();
+    this._removePlace.addEventListener("click", (evt) => {
+      this._handleCardDelete(evt);
     });
     this._likeButton.addEventListener("click", () => {
-      this._handleCardLikes(this._isLiked, this._id).then(this._likeButton.classList.toggle("places__element-like_active"));
+      this._handleCardLikes(this._isLiked())
+      .then((res) =>{
+        console.log(res.likes);
+        this._likeButton.classList.toggle("places__element-like_active");
+        this._likes = res.likes;
+        this._showLikes.textContent = this._likes.length;
+      });
     });
   }
   generateCard() {
@@ -47,10 +49,7 @@ class Card {
     this._showLikes = this._card.querySelector(".places__show-likes");
     this._showLikes.textContent = this._likes.length;
     this._removePlace = this._card.querySelector(".places__element-remove");
-    console.log(this._data.owner._id);
-    console.log(this._userData);
-    console.log(this._likes);
-    if (this._data.owner._id != this._userData._id) {
+    if (this._data.owner._id !== this._userData) {
       this._removePlace.remove();
     }
     this._likeButton = this._card.querySelector(".places__element-like");

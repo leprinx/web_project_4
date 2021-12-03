@@ -31,7 +31,7 @@ class Api {
       }
     });
   }
-  updateUserId({ name, about }) {
+  updateUserId(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
@@ -39,8 +39,8 @@ class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        about: about,
+        name: data.name,
+        about: data.about,
       }),
     })
     .then((res) => {
