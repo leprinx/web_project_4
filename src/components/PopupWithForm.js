@@ -5,6 +5,7 @@ class PopupWithForm extends Popup {
         super(popupSelector);
         this._callback = callback;
         this._form = this._popupElement.querySelector(".form");
+        this._button = this._form.querySelector(".form__save-button");
     }
     _getInputValues() {
         this._inputList = Array.from(this._popupElement.querySelectorAll(".form__edit-form"));
@@ -21,6 +22,15 @@ class PopupWithForm extends Popup {
             this._callback(this._getInputValues());
         });
         super.setEventListeners();
+    }
+    open() {
+        super.open();
+        this._button.textContent = "Save"
+    }
+
+    close() {
+        super.close();
+        this._form.reset();
     }
 }
 export default PopupWithForm;

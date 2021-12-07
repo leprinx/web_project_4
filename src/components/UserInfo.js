@@ -3,6 +3,7 @@ class UserInfo {
         this._name = name;
         this._job = job;
         this._avatar = avatar;
+        console.log("userInfo");
     }
     getUserInfo() {
         this._userObject = {

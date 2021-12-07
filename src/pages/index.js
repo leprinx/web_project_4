@@ -47,6 +47,7 @@ Promise.all([userInfo, firstCards])
 })
 
 
+
 const createCard = (card) => {
   const newCardAdded = new Card(
     {
@@ -72,14 +73,16 @@ const renderElementsTemplate = new Section(
     renderer: (card) => { 
       const newCard = createCard(card);
       const generatedCard = newCard.generateCard(); 
-      renderElementsTemplate.addItem(generatedCard); 
+      renderElementsTemplate.addItem(generatedCard);
+      console.log("renderer");
     }, 
   }, 
   ".places__elements" 
 ); 
 
 const imageModal = new PopupWithImage(".cover_type_preview"); 
-imageModal.setEventListeners(); 
+imageModal.setEventListeners();
+
 
 const newUserInfo = new UserInfo({ 
   name: displayedName, 
@@ -99,14 +102,15 @@ const changePicPopup = new PopupWithForm(
         .catch((err) => {
           console.log(`Error: ${err}`);
         })
-        .finally(loadingMessage(false, formAvatar, "Saved")); 
+        .finally(loadingMessage(false, formAvatar, "Saved"));
+        
     }, 
   }, 
   ".cover_type_changePic" 
 ); 
 changePicPopup.setEventListeners(); 
 avatarButton.addEventListener("click", () => { 
-  changePicPopup.open(); 
+  changePicPopup.open();
 }); 
 
 const deletePopup = new PopupDeleteCard(

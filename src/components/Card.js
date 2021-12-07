@@ -36,6 +36,8 @@ class Card {
         this._likeButton.classList.toggle("places__element-like_active");
         this._likes = res.likes;
         this._showLikes.textContent = this._likes.length;
+      }).catch((err) => {
+        console.log(`Error: ${err}`);
       });
     });
   }

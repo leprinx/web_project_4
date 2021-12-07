@@ -12,9 +12,8 @@ class Api {
       .then((res) => {
         if (res.ok) {
           return res.json();
-        } else {
-          return Promise.reject(`Error ${res.status}`);
-        }
+      }
+      return Promise.reject(`Error ${res.status}`);
       });
   }
   getUserData() {
@@ -26,9 +25,8 @@ class Api {
     .then((res) => {
       if (res.ok) {
         return res.json();
-      } else {
-        return Promise.reject(`Error ${res.status}`);
-      }
+    }
+    return Promise.reject(`Error ${res.status}`);
     });
   }
   updateUserId(data) {
@@ -46,9 +44,8 @@ class Api {
     .then((res) => {
       if (res.ok) {
         return res.json();
-      } else {
-        return Promise.reject(`Error ${res.status}`);
-      }
+    }
+    return Promise.reject(`Error ${res.status}`);
     });
   }
   addCard({ name, link }) {
@@ -66,9 +63,8 @@ class Api {
     .then((res) => {
       if (res.ok) {
         return res.json();
-      } else {
-        return Promise.reject(`Error ${res.status}`);
-      }
+    }
+    return Promise.reject(`Error ${res.status}`);
     });
   }
   addLike(id) {
@@ -82,9 +78,8 @@ class Api {
     .then((res) => {
       if (res.ok) {
         return res.json();
-      } else {
-        return Promise.reject(`Error ${res.status}`);
-      }
+    }
+    return Promise.reject(`Error ${res.status}`);
     });
   }
   removeLike(id) {
@@ -98,9 +93,8 @@ class Api {
     .then((res) => {
       if (res.ok) {
         return res.json();
-      } else {
-        return Promise.reject(`Error ${res.status}`);
-      }
+    }
+    return Promise.reject(`Error ${res.status}`);
     });
   }
   removeCard(id) {
@@ -114,9 +108,8 @@ class Api {
     .then((res) => {
       if (res.ok) {
         return res.json();
-      } else {
-        return Promise.reject(`Error ${res.status}`);
-      }
+    }
+    return Promise.reject(`Error ${res.status}`);
     });
   }
   changeProfilePic(newAvatar) {
