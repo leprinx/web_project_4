@@ -27,6 +27,13 @@ import {
 } from "../utils/constants.js"; 
 import initialCards from "../utils/initialCards.js"; 
 import {  loadingMessage } from "../utils/functions.js"; 
+import { timers } from "jquery";
+
+
+// //Dear reviewer, sorry for the previous two iterations as i rushed and only corrected the
+// orange marked points, i didnt see as many wrong as pointed so if thats the case please let me know what to change in particular.
+// Only doubt i have as for now is the UI changing text in the form button, as it logs in the console what i expect but is so quick i cannot see otherwise.
+// Thanks for your time, appreciate it//
 
 
 const api = new Api({ 
@@ -74,7 +81,6 @@ const renderElementsTemplate = new Section(
       const newCard = createCard(card);
       const generatedCard = newCard.generateCard(); 
       renderElementsTemplate.addItem(generatedCard);
-      console.log("renderer");
     }, 
   }, 
   ".places__elements" 
@@ -97,12 +103,14 @@ const changePicPopup = new PopupWithForm(
       api 
 
         .changeProfilePic(input["pic-link"])
-        .then(avatar.src = input["pic-link"])
-        .then(changePicPopup.close())
+        .then(() => {
+          newUserInfo.changeAvatar(input["pic-link"]);
+          changePicPopup.close()
+        })
         .catch((err) => {
           console.log(`Error: ${err}`);
         })
-        .finally(loadingMessage(false, formAvatar, "Saved"));
+        .finally(loadingMessage(true, formAvatar, "Saved"));
         
     }, 
   }, 
@@ -126,7 +134,7 @@ const deletePopup = new PopupDeleteCard(
         .catch((err) => {
           console.log(`Error: ${err}`);
         })
-        .finally(loadingMessage(false, formDelete, "Deleting..."));  
+        .finally(loadingMessage(false, formDelete, "Deleted"));  
     }, 
   }, 
   ".cover_type_delete" 
@@ -147,7 +155,10 @@ const editProfileForm = new PopupWithForm(
         .then(res =>{
           newUserInfo.setUserInfo(res);
         })
-        .then(editProfileForm.close()) 
+        .then(editProfileForm.close())
+        .catch((err) => {
+          console.log(`Error: ${err}`);
+        })
         .finally(loadingMessage(false, formEditProfile, "Saved"));  
     }, 
   }, 
@@ -175,7 +186,10 @@ const addCardForm = new PopupWithForm(
           renderElementsTemplate.addItem(addedPlace.generateCard()); 
         })
         .then(addCardForm.close())
-        .finally(loadingMessage(false, formAddCard, "Adding...")); 
+        .catch((err) => {
+          console.log(`Error: ${err}`);
+        })
+        .finally(loadingMessage(false, formAddCard, "Added")); 
     }, 
   }, 
   ".cover_type_add" 

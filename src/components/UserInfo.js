@@ -3,7 +3,6 @@ class UserInfo {
         this._name = name;
         this._job = job;
         this._avatar = avatar;
-        console.log("userInfo");
     }
     getUserInfo() {
         this._userObject = {
@@ -21,8 +20,8 @@ class UserInfo {
     getId() {
         return this._userId;
       }
-    setAvatar(data){
-        this._avatar.src = data.avatar;
+    changeAvatar(data){
+        this._avatar.src = data;
     }
 }
 export default UserInfo;
