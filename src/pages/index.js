@@ -140,7 +140,7 @@ const editProfileForm = new PopupWithForm(
         .then(res =>{
           newUserInfo.setUserInfo(res);
         })
-        .then(editProfileForm.close())
+        .then(() => editProfileForm.close())
         .catch((err) => {
           console.log(`Error: ${err}`);
         })
@@ -168,7 +168,7 @@ const addCardForm = new PopupWithForm(
           const addedPlace = createCard(response);
           renderElementsTemplate.addItem(addedPlace.generateCard()); 
         })
-        .then(addCardForm.close())
+        .then(() => addCardForm.close())
         .catch((err) => {
           console.log(`Error: ${err}`);
         })
