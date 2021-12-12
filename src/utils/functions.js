@@ -8,12 +8,3 @@ const imageModal = new PopupWithImage(".cover_type_preview");
 
 
 
-export const loadingMessage = (loading, popupSelector, textContent) => {
-  if (loading) {
-    popupSelector.querySelector(".form__save-button").textContent = textContent;
-    console.log(textContent);
-  } else {
-    popupSelector.querySelector(".form__save-button").textContent = textContent;
-    console.log(textContent);  
-  }
-};

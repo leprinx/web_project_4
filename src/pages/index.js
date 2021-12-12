@@ -26,14 +26,8 @@ import {
   formEditProfile, 
 } from "../utils/constants.js"; 
 import initialCards from "../utils/initialCards.js"; 
-import {  loadingMessage } from "../utils/functions.js"; 
 import { timers } from "jquery";
 
-
-// //Dear reviewer, sorry for the previous two iterations as i rushed and only corrected the
-// orange marked points, i didnt see as many wrong as pointed so if thats the case please let me know what to change in particular.
-// Only doubt i have as for now is the UI changing text in the form button, as it logs in the console what i expect but is so quick i cannot see otherwise.
-// Thanks for your time, appreciate it//
 
 
 const api = new Api({ 
@@ -99,9 +93,7 @@ const newUserInfo = new UserInfo({
 const changePicPopup = new PopupWithForm( 
   { 
     callback: (input) => { 
-      loadingMessage(true, formAvatar, "Saving..."); 
       api 
-
         .changeProfilePic(input["pic-link"])
         .then(() => {
           newUserInfo.changeAvatar(input["pic-link"]);
@@ -109,9 +101,7 @@ const changePicPopup = new PopupWithForm(
         })
         .catch((err) => {
           console.log(`Error: ${err}`);
-        })
-        .finally(loadingMessage(true, formAvatar, "Saved"));
-        
+        })        
     }, 
   }, 
   ".cover_type_changePic" 
@@ -124,8 +114,6 @@ avatarButton.addEventListener("click", () => {
 const deletePopup = new PopupDeleteCard(
   { 
     callback: (id, place) => { 
-      loadingMessage(true, formDelete, "Deleting..."); 
-      api
         api.removeCard(id)
         .then(()=> {
           place.remove();
@@ -133,8 +121,7 @@ const deletePopup = new PopupDeleteCard(
           )
         .catch((err) => {
           console.log(`Error: ${err}`);
-        })
-        .finally(loadingMessage(false, formDelete, "Deleted"));  
+        }) 
     }, 
   }, 
   ".cover_type_delete" 
@@ -148,8 +135,6 @@ deletePopup.setEventListeners();
 const editProfileForm = new PopupWithForm( 
   { 
     callback: (data) => {
-      console.log(data)
-      loadingMessage(true, formEditProfile, "Saving..."); 
       api 
         .updateUserId(data)
         .then(res =>{
@@ -159,7 +144,6 @@ const editProfileForm = new PopupWithForm(
         .catch((err) => {
           console.log(`Error: ${err}`);
         })
-        .finally(loadingMessage(false, formEditProfile, "Saved"));  
     }, 
   }, 
   ".cover_type_edit" 
@@ -177,7 +161,6 @@ openEditProfileBtn.addEventListener("click", () => {
 const addCardForm = new PopupWithForm( 
   { 
     callback: (card) => { 
-      loadingMessage(true, formAddCard, "Adding..."); 
       api 
         .addCard(card) 
         .then((res) => { 
@@ -189,7 +172,6 @@ const addCardForm = new PopupWithForm(
         .catch((err) => {
           console.log(`Error: ${err}`);
         })
-        .finally(loadingMessage(false, formAddCard, "Added")); 
     }, 
   }, 
   ".cover_type_add" 

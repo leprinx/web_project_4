@@ -3,18 +3,19 @@ class Api {
     this._baseUrl = baseUrl;
     this._authToken = authToken;
   }
+  _checkResponse(res) {
+    if (res.ok) {
+        return res.json();
+    }
+    return Promise.reject("Error")
+}
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
         authorization: this._authToken,
       },
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-      }
-      return Promise.reject(`Error ${res.status}`);
-      });
+    .then((res) => this._checkResponse(res));
   }
   getUserData() {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -22,12 +23,7 @@ class Api {
         authorization: this._authToken,
       },
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-    }
-    return Promise.reject(`Error ${res.status}`);
-    });
+    .then((res) => this._checkResponse(res));
   }
   updateUserId(data) {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -41,12 +37,7 @@ class Api {
         about: data.about,
       }),
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-    }
-    return Promise.reject(`Error ${res.status}`);
-    });
+    .then((res) => this._checkResponse(res));
   }
   addCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
@@ -60,12 +51,7 @@ class Api {
         link: link,
       }),
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-    }
-    return Promise.reject(`Error ${res.status}`);
-    });
+    .then((res) => this._checkResponse(res));
   }
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
@@ -75,12 +61,7 @@ class Api {
         "Content-Type": "application/json",
       },
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-    }
-    return Promise.reject(`Error ${res.status}`);
-    });
+    .then((res) => this._checkResponse(res));
   }
   removeLike(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
@@ -90,12 +71,7 @@ class Api {
         "Content-Type": "application/json",
       },
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-    }
-    return Promise.reject(`Error ${res.status}`);
-    });
+    .then((res) => this._checkResponse(res));
   }
   removeCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
@@ -105,12 +81,7 @@ class Api {
         "Content-Type": "application/json",
       },
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-    }
-    return Promise.reject(`Error ${res.status}`);
-    });
+    .then((res) => this._checkResponse(res));
   }
   changeProfilePic(newAvatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
@@ -122,7 +93,8 @@ class Api {
       body: JSON.stringify({
         avatar: newAvatar,
       }),
-    });
+    })
+    .then((res) => this._checkResponse(res));
   }
 }
 

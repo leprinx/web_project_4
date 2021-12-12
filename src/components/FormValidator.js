@@ -12,8 +12,7 @@ class FormValidator {
     }
     _toggleSubmit() {
         if (!this._hasSomeInvalid()) {
-            this._button.disabled = true;
-            this._button.classList.add(this._inactiveButtonClass);
+            this._disableButton();
         } else {
             this._button.disabled = false;
             this._button.classList.remove(this._inactiveButtonClass);
@@ -36,12 +35,15 @@ class FormValidator {
             this._showInputError(input);
         }
     }
+    _disableButton(){
+        this._button.disabled = true;
+        this._button.classList.add(this._inactiveButtonClass);
+    }
     _setEventListeners() {
         this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
         this._button = this._form.querySelector(this._submitButtonSelector);
         this._form.addEventListener("reset", ()=>{
-            this._button.disabled = true;
-            this._button.classList.add(this._inactiveButtonClass);
+            this._disableButton();
             this._inputList.forEach((inputElement) => {
                 this._hideInputError(inputElement) 
             })

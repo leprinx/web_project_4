@@ -22,8 +22,8 @@ export const openEditProfileBtn = document.querySelector(".profile__modifier");
 const closeEditProfileBtn = document.querySelector(".button_type_profile");
 export const formEditProfile = document.querySelector(".form_type_profile");
 
-export let inputUserName = document.querySelector(".form__edit-form_type_name");
-export let inputUserDescription = document.querySelector(".form__edit-form_type_description");
+export const inputUserName = document.querySelector(".form__edit-form_type_name");
+export const inputUserDescription = document.querySelector(".form__edit-form_type_description");
 export const displayedName = document.querySelector(".profile__author");
 export const displayedInfo = document.querySelector(".profile__subtitle");
 
@@ -47,4 +47,4 @@ const previewSubtitle = popupImage.querySelector(".cover__preview-image-subtitle
 const closePopupImage = popupImage.querySelector(".button_type_preview");
 
 //change profile picture
-export let popupChangeProfilePic = document.querySelector(".cover_type_changePic");
+export const popupChangeProfilePic = document.querySelector(".cover_type_changePic");

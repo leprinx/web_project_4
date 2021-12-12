@@ -16,6 +16,7 @@ class PopupDeleteCard extends Popup {
     setEventListeners() {
         this._form.addEventListener("submit", (evt) => {
             evt.preventDefault();
+            this._button.textContent = 'Deleting...';
             this._callback(this._cardId, this._card);
         });
         super.setEventListeners();
